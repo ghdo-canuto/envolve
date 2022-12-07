@@ -51,5 +51,27 @@ jobs:
     - name: Terraform Plan
       run: |
         cd ${{ github.workspace }}/stacks/solo_network
-        terraform plan -var-file=../env/infra-base/infra-base.tfvars -out=plano.tfvars
+        terraform plan -var-file=../env/infra-base/infra-base.tfvars -out=plano.tfplan
+        
+    - name: Terraform fmt
+      run: |
+        cd ${{ github.workspace }}/stacks/solo_network
+        terraform show -no-color -json plano.tfplan > envolve.json
 
+    - name: Setup Infracost
+      run: |
+        sudo apt-get update -qq && sudo apt-get -qq install bc curl git
+        curl -sL https://github.com/infracost/infracost/releases/latest/download/infracost-linux-amd64.tar.gz | tar xz -C /tmp
+        sudo mv /tmp/infracost-linux-amd64 /usr/bin/infracost
+        curl -sL -o infracost_diff.sh https://raw.githubusercontent.com/infracost/infracost/master/scripts/ci/diff.sh
+        chmod +x infracost_diff.sh
+        #./infracost_diff.sh
+         infracost breakdown --no-color --path $(System.DefaultWorkingDirectory)/stacks/solo_network/envolve.json
+
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken) # Do not change this, it's used to post comments
+        INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        path: ${{ github.workspace }}/stacks/solo_network/envolve.json
