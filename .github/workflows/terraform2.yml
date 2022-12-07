@@ -66,7 +66,7 @@ jobs:
         curl -sL -o infracost_diff.sh https://raw.githubusercontent.com/infracost/infracost/master/scripts/ci/diff.sh
         chmod +x infracost_diff.sh
         #./infracost_diff.sh
-         infracost breakdown --no-color --path $(System.DefaultWorkingDirectory)/stacks/solo_network/envolve.json
+         infracost breakdown --no-color --path ${{ github.workspace }}/stacks/solo_network/envolve.json
 
       env:
         SYSTEM_ACCESSTOKEN: $(System.AccessToken) # Do not change this, it's used to post comments
