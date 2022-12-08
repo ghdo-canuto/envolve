@@ -65,11 +65,15 @@ jobs:
       uses: hashicorp/setup-terraform@v2.0.3
       # with:
       #   terraform_wrapper: false
-    
-    - name: Terraform Init
+
+    - name: Terraform workspace
       run: |
         cd ${{ github.workspace }}/stacks/solo_network
         terraform workspace new $environmentName
+
+    - name: Terraform Init
+      run: |
+        cd ${{ github.workspace }}/stacks/solo_network
         terraform init -backend-config=storage_account_name=$TerraformBackendStorageAccount -backend-config=container_name=$TerraformBackendStorageContainer -backend-config=key=dev.tfstate -backend-config=resource_group_name=$TerraformBackendResourceGroup -backend-config=subscription_id="$ARM_SUBSCRIPTION_ID" -backend-config=tenant_id="$ARM_TENANT_ID" -backend-config=client_id="$ARM_CLIENT_ID" -backend-config=client_secret="$ARM_CLIENT_SECRET" -reconfigure
  
     - name: Terraform Plan
