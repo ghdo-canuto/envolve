@@ -99,7 +99,8 @@ jobs:
         path: ${{ github.workspace }}/stacks/solo_network/envolve.json
 
 
-    - uses: actions/github-script@v6
+    - name: Adiconando terraform plan ao pull request
+      uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
