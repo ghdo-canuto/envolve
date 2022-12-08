@@ -141,3 +141,5 @@ jobs:
             })
           }
 
+    - name: Replace variables into files terraform
+      uses: "./.github/workflows/template/terraform-apply/"
