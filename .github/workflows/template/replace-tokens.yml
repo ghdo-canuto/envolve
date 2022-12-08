@@ -1,0 +1,40 @@
+
+name: replace tokens
+
+# Were we can define the inputs that our action will accept
+inputs:
+  version: 
+    required: true
+  namespace:
+    required: true
+  ObjectID_SPA_kevault_read: 
+    required: true
+  ObjectID_SPA_kevault_full:
+    required: true
+  clintid_AKS: 
+    required: true
+  Secret_AKS: 
+    required: true
+  Password_nodes_windons: 
+    required: true
+  Password_vms_windons:
+    required: true
+  shared_key_vpn:
+    required: true
+
+
+runs:
+
+  # Defining the action steps(Just one step to be simple)
+  steps:
+  - uses: cschleiden/replace-tokens@v1
+    with:
+      files: '["**/*.tf"]'
+    env:
+      ObjectID_SPA_kevault_read: ${{ inputs.ObjectID_SPA_kevault_read }}
+      ObjectID_SPA_kevault_full: ${{ inputs.ObjectID_SPA_kevault_full }}
+      clintid_AKS: ${{ inputs.clintid_AKS }}
+      Secret_AKS: ${{ inputs.Secret_AKS }}
+      Password_nodes_windons: ${{ inputs.Password_nodes_windons }}
+      Password_vms_windons: ${{ inputs.Password_vms_windons}}
+      shared_key_vpn: ${{ inputs.shared_key_vpn }}
