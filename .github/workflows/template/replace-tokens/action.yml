@@ -20,7 +20,7 @@ inputs:
 
 
 runs:
-
+  using: "composite"
   # Defining the action steps(Just one step to be simple)
   steps:
   - uses: cschleiden/replace-tokens@v1
