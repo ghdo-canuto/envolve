@@ -28,7 +28,8 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
       TerraformBackendStorageAccount: ${{ secrets.TF_BACKEND_STORAGE_ACCOUNT }}
       TerraformBackendResourceGroup: ${{ secrets.TF_BACKEND_RESOURCE_GROUP }}
-      TerraformBackendStorageContainer: ${{ secrets.TF_BACKEND_CONTAINER }}         
+      TerraformBackendStorageContainer: ${{ secrets.TF_BACKEND_CONTAINER }}    
+      environmentName: dev     
       
     defaults:
       run:
@@ -52,8 +53,8 @@ jobs:
     - name: Generate ssh  Kubernets
       run: |
         mkdir -p ~/.ssh/aks-$environment-sshkeys-terraform/
-        ssh-keygen -f ~/.ssh/aks-$environment-sshkeys-terraform/aks$environmentNamesshkey -N ''
-        cp ~/.ssh/aks-$environment-sshkeys-terraform/*  ${{ github.workspace }}/stacks/solo_network
+        ssh-keygen -f ~/.ssh/aks-$environmentName-sshkeys-terraform/aks$environmentNamesshkey -N ''
+        cp ~/.ssh/aks-$environmentName-sshkeys-terraform/*  ${{ github.workspace }}/stacks/solo_network
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
