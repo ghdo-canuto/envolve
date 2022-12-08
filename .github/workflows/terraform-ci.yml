@@ -154,7 +154,7 @@ jobs:
           }
 
   terraform_apply:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request'
     name: 'Terraform apply'
     needs: [tf_validate]
     runs-on: ubuntu-latest
