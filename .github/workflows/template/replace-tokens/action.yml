@@ -3,10 +3,6 @@ name: replace tokens
 
 # Were we can define the inputs that our action will accept
 inputs:
-  version: 
-    required: true
-  namespace:
-    required: true
   ObjectID_SPA_kevault_read: 
     required: true
   ObjectID_SPA_kevault_full:
