@@ -53,10 +53,8 @@ jobs:
     - name: Generate ssh  Kubernets
       run: |
         mkdir -p ~/.ssh/aks-$environmentName-sshkeys-terraform/
-        ssh-keygen -f ~/.ssh/aks-$environmentName-sshkeys-terraform/aksenvironmentNamesshkey -N ''
+        ssh-keygen -f ~/.ssh/aks-$environmentName-sshkeys-terraform/aks-$environmentName-sshkey -N ''
         cp ~/.ssh/aks-$environmentName-sshkeys-terraform/*  ${{ github.workspace }}/stacks/solo_network
-      env:
-        environmentName: dev
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
