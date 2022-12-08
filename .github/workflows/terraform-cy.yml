@@ -51,6 +51,8 @@ jobs:
 
     - name: Generate ssh  Kubernets
       uses: "./.github/workflows/template/ssh-keygen/"
+      with:
+        environmentName: $environmentName
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3

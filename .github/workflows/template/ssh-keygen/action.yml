@@ -1,5 +1,9 @@
 name: create ssh publick AKS
 
+inputs:
+  environmentName: 
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -7,3 +11,5 @@ runs:
       mkdir -p ~/.ssh/aks-$environmentName-sshkeys-terraform/
       ssh-keygen -f ~/.ssh/aks-$environmentName-sshkeys-terraform/aks$environmentNamesshkey -N ''
       cp ~/.ssh/aks-$environmentName-sshkeys-terraform/*  ${{ github.workspace }}/stacks/solo_network
+    env:
+      environmentName: ${{ inputs.environmentName }}
