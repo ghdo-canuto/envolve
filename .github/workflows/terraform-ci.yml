@@ -2,13 +2,19 @@ name: 'Terraform CI'
 on:
   push:
     branches: [ "development" ]
+    paths:
+      - stacks/**
   pull_request:
-  workflow_dispatch:
-    inputs:
-      TFAction:
-        description: "Terraform Action- Apply or Destroy"     
-        required: true
-        default: "apply"
+    branches:
+      - development
+    paths:
+      - stacks/**
+  # workflow_dispatch:
+  #   inputs:
+  #     TFAction:
+  #       description: "Terraform Action- Apply or Destroy"     
+  #       required: true
+  #       default: "apply"
 
 
 permissions:
