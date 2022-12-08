@@ -25,7 +25,7 @@ runs:
   steps:
   - uses: cschleiden/replace-tokens@v1
     with:
-      files: '["**/*.tf"]'
+      files: '["**/dev.tfvars"]'
     env:
       ObjectID_SPA_kevault_read: ${{ inputs.ObjectID_SPA_kevault_read }}
       ObjectID_SPA_kevault_full: ${{ inputs.ObjectID_SPA_kevault_full }}

@@ -50,9 +50,10 @@ jobs:
         shared_key_vpn: ${{ secrets.AZURE_VPN_KEY }}
 
     - name: Generate ssh  Kubernets
-      uses: "./.github/workflows/template/ssh-keygen/"
-      with:
-        environmentName: $environmentName
+      run: |
+        mkdir -p ~/.ssh/aks-$environment-sshkeys-terraform/
+        ssh-keygen -f ~/.ssh/aks-$environment-sshkeys-terraform/aks$environmentNamesshkey -N ''
+        cp ~/.ssh/aks-$environment-sshkeys-terraform/*  ${{ github.workspace }}/stacks/solo_network
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
