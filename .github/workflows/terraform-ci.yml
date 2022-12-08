@@ -140,6 +140,30 @@ jobs:
               body: output
             })
           }
-
-    - name: Replace variables into files terraform
+    - name: Terraform Apply
       uses: "./.github/workflows/template/terraform-apply/"
+  # terraform_apply:
+  #     name: 'terraform apply'
+  #     needs: [tf_validate]
+  #     runs-on: ubuntu-latest
+  #     environment: dev
+      
+  #     defaults:
+  #       run:
+  #         shell: bash
+
+  #     steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Setup Terraform
+  #       uses: hashicorp/setup-terraform@v2.0.3
+
+  #     - name: terraform Apply
+  #       if: github.ref == 'refs/heads/development' && github.event_name == 'push'
+  #       run: |
+  #         cd ${{ github.workspace }}/stacks/solo_network
+  #         terraform apply envolve.json -auto-approve
+
+
+ 
