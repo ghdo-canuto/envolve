@@ -8,6 +8,9 @@ on:
 permissions:
   contents: read
 
+env:
+  environmentName: dev
+
 jobs:
   terraform:
     name: 'Terraform'
