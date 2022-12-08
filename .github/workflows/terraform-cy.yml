@@ -52,7 +52,7 @@ jobs:
 
     - name: Generate ssh  Kubernets
       run: |
-        mkdir -p ~/.ssh/aks-$environment-sshkeys-terraform/
+        mkdir -p ~/.ssh/aks-$environmentName-sshkeys-terraform/
         ssh-keygen -f ~/.ssh/aks-$environmentName-sshkeys-terraform/aks$environmentNamesshkey -N ''
         cp ~/.ssh/aks-$environmentName-sshkeys-terraform/*  ${{ github.workspace }}/stacks/solo_network
 
@@ -69,7 +69,7 @@ jobs:
     - name: Terraform Plan
       run: |
         cd ${{ github.workspace }}/stacks/solo_network
-        terraform plan -var-file=../env/$environment/$environment.tfvars -out=envolve.tfplan
+        terraform plan -var-file=../env/$environmentName/$environmentName.tfvars -out=envolve.tfplan
         
     - name: Terraform fmt
       run: |
