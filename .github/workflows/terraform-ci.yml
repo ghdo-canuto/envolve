@@ -1,12 +1,12 @@
 name: 'Terraform CI'
 on:
   push:
-    branches: [ "development" ]
+    branches: [ "main" ]
     paths:
       - stacks/**
   pull_request:
     branches:
-      - development
+      - main
     paths:
       - stacks/**
   # workflow_dispatch:
@@ -175,7 +175,7 @@ jobs:
       uses: hashicorp/setup-terraform@v2.0.3
     
     - name: terraform Apply
-      if: github.ref == 'refs/heads/development' && github.event_name == 'pull_request'
+      if: github.ref == 'refs/heads/main' && github.event_name == 'pull_request'
       run: |
         cd ${{ github.workspace }}
         terraform apply envolve.json -auto-approve
