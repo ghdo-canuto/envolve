@@ -1,0 +1,8 @@
+name: create ssh publick AKS
+
+runs:
+  steps:
+    run: |
+      mkdir -p ~/.ssh/aks-${{parameters.environmentName}}-sshkeys-terraform/
+      ssh-keygen -f ~/.ssh/aks-${{parameters.environmentName}}-sshkeys-terraform/aks${{parameters.environmentName}}sshkey -N ''
+      cp ~/.ssh/aks-${{parameters.environmentName}}-sshkeys-terraform/*  $(System.DefaultWorkingDirectory)/stacks/solo_network/

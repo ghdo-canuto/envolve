@@ -39,7 +39,7 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Replace variables into files terraform
-      uses: "./.github/workflows/template/replace-tokens.yml"
+      uses: "./.github/workflows/template/"
       with:
         ObjectID_SPA_kevault_read: ${{ secrets.AZURE_AD_CLIENT_ID }}
         ObjectID_SPA_kevault_full: ${{ secrets.AZURE_AD_CLIENT_ID }}
@@ -50,7 +50,7 @@ jobs:
         shared_key_vpn: ${{ secrets.AZURE_VPN_KEY }}
 
     - name: Generate ssh  Kubernets
-      uses: "./.github/workflows/template/ssh-keygen.yml"
+      uses: "./.github/workflows/template/"
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
