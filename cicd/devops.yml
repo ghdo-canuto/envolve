@@ -1,0 +1,12 @@
+trigger:
+- none
+
+resources:
+  repositories:
+    - repository: devopspipelines
+      type: git
+      name: Projeto Aplex/Devops Pipeline
+
+
+stages:
+- template: terraform-ci-cd.yml@devopspipelines
