@@ -101,7 +101,7 @@ module "aks" {
 }
 
 module "vnet-spoke" {
-  count  = var.vnet-spoke_module_enabled == true ?  1 : 0
+  count  = var.vnet-spoke_module_enabled == true ? 1 : 0
   source = "../../modules/vnet"
 
   resource_group_name                                   = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vnet", resource_group_name))])
@@ -136,7 +136,7 @@ module "vnet-spoke" {
 
 
 module "vnet-hub" {
-  count  = var.vnet-hub_module_enabled  ?  1 : 0
+  count  = var.vnet-hub_module_enabled ? 1 : 0
   source = "../../modules/vnet"
 
   resource_group_name                                   = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vnet", resource_group_name))])
@@ -171,7 +171,7 @@ module "vnet-hub" {
 }
 
 module "key_vault" {
-  count  = var.key_vault_module_enabled == true ?  1 : 0
+  count  = var.key_vault_module_enabled == true ? 1 : 0
   source = "../../modules/key_vault"
 
   resource_group_name         = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vault", resource_group_name))])
@@ -190,7 +190,7 @@ module "key_vault" {
 }
 
 module "key_vault_access_policy" {
-  count  = var.key_vault_module_enabled == true ?  1 : 0
+  count  = var.key_vault_module_enabled == true ? 1 : 0
   source = "../../modules/access_policy"
 
   resource_group_name = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vault", resource_group_name))])
@@ -205,7 +205,7 @@ module "key_vault_access_policy" {
 }
 
 module "pip" {
-  count  = var.pip_module_enabled == true ?  1 : 0
+  count  = var.pip_module_enabled == true ? 1 : 0
   source = "../../modules/pip"
 
   resource_group_name   = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vnet", resource_group_name))])
@@ -223,7 +223,7 @@ module "pip" {
 }
 
 module "pip_vpn" {
-  count  = var.pip_vpn_module_enabled == true ?  1 : 0
+  count  = var.pip_vpn_module_enabled == true ? 1 : 0
   source = "../../modules/pip"
 
   resource_group_name   = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vnet", resource_group_name))])
@@ -241,7 +241,7 @@ module "pip_vpn" {
 }
 
 module "bastion" {
-  count  = var.bastion_module_enabled && var.pip_module_enabled  ?  1 : 0
+  count  = var.bastion_module_enabled && var.pip_module_enabled ? 1 : 0
   source = "../../modules/bastion"
 
   resource_group_name    = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("bastion", resource_group_name))])
@@ -270,7 +270,7 @@ module "bastion" {
 }
 
 module "dns_private" {
-  count  = var.dns_private_module_enabled == true ?  1 : 0
+  count  = var.dns_private_module_enabled == true ? 1 : 0
   source = "../../modules/dns/private"
 
   resource_group_name = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vnet", resource_group_name))])
@@ -287,7 +287,7 @@ module "dns_private" {
 }
 
 module "vm-win" {
-  count  = var.vm-win_module_enabled && var.vnet-hub_module_enabled ?  1 : 0
+  count  = var.vm-win_module_enabled && var.vnet-hub_module_enabled ? 1 : 0
   source = "../../modules/vm-windows"
 
   resource_group_name       = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vm", resource_group_name))])
@@ -331,7 +331,7 @@ module "vm-win" {
 
 
 module "wks_log" {
-  count  = var.wks_log_module_enabled == true ?  1 : 0
+  count  = var.wks_log_module_enabled == true ? 1 : 0
   source = "../../modules/log_analytics"
 
   log_analytics_workspace_name = "wkslog-${var.log_analytics_workspace_name}-${terraform.workspace}-${var.location}"
@@ -347,7 +347,7 @@ module "wks_log" {
 }
 
 module "network_watcher" {
-  count  = var.network_watcher_module_enabled == true ?  1 : 0
+  count  = var.network_watcher_module_enabled == true ? 1 : 0
   source = "../../modules/network_watcher"
 
   network_watcher_name = var.network_watcher_name
@@ -360,7 +360,7 @@ module "network_watcher" {
 }
 
 module "storage_account" {
-  count  = var.storage_account_module_enabled == true ?  1 : 0
+  count  = var.storage_account_module_enabled == true ? 1 : 0
   source = "../../modules/storage"
 
   storage_account_name   = "${var.storage_account_name}${terraform.workspace}${var.location}"
@@ -383,7 +383,7 @@ module "storage_account" {
 }
 
 module "gatway_vpn" {
-  count  = var.gatway_vpn_module_enabled && var.pip_vpn_module_enabled && var.vnet-hub_module_enabled ?  1 : 0
+  count  = var.gatway_vpn_module_enabled && var.pip_vpn_module_enabled && var.vnet-hub_module_enabled ? 1 : 0
   source = "../../modules/network_gateway"
 
   name                           = var.gateway_name
@@ -409,7 +409,7 @@ module "gatway_vpn" {
 }
 
 module "local_gw" {
-  count  = var.local_gw_module_enabled &&  var.gatway_vpn_module_enabled ?  1 : 0
+  count  = var.local_gw_module_enabled && var.gatway_vpn_module_enabled ? 1 : 0
   source = "../../modules/local_network_gateway"
 
   resource_group_name = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("vnet", resource_group_name))])

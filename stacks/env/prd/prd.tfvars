@@ -2,12 +2,12 @@
 # Global Vars
 #----------------------
 resource_group_names = [
-  "rg-eastus-vnet", 
-  "rg-eastus-vault", 
-  "rg-eastus-acr", 
-  "rg-eastus-aks",
-  "rg-monitoramento",
-  "rg-storage"
+  "rg-us-envolve-vnet", 
+  "rg-us-envolve-vault", 
+  "rg-us-envolve-acr", 
+  "rg-us-envolve-aks",
+  "rg-us-envolve-monitoramento",
+  "rg-us-envolve-storage"
 ]
 
 tags_rg = [
@@ -33,10 +33,11 @@ tags_rg = [
 
 location            = "eastus2"
 global_tags = {
-  Department    = "Solo Network"
+  Department    = "Envolve IT"
   Environment   = "Prd"
-  Project       = "POC DevOps"
+  Project       = "DevOps"
   Provisioner   = "Terraform"
+  onwer         = "Canuto"
 }
 
 acr_module_enabled                  = true
@@ -58,7 +59,7 @@ local_gw_module_enabled             = false
 #--------------------
 # ACR Vars
 #--------------------
-acr_name         = "soloDevOps"
+acr_name         = "acrusenvolve"
 acr_enable_admin = true
 sku              = "Standard"
 tags_acr         = {
@@ -68,15 +69,15 @@ tags_acr         = {
 #----------------------
 # AKS Vars
 #----------------------
-cluster_name                                  = "k8s-solo-devops"
+cluster_name                                  = "aks-envolve"
 tags_aks                                      = {
                                      resource = "aks"
 }
 sku_tier_aks                                  = "Free"
 k8s_version                                   = "1.23.12"
-dns_prefix                                    = "k8s-solo-devops"
+dns_prefix                                    = "aks-envolve"
 disable_local_account                         = false
-private_cluster_enabled                       = false
+private_cluster_enabled                       = true
 http_application_routing_enabled              = true
 aks_dns_ip                                    = null
 name_pool_default                             = "system"
@@ -88,7 +89,7 @@ agent_count_default                           = 3
 max_nodes_default                             = 3
 min_nodes_default                             = 1
 admin_linux 	                                = "useradmin"
-ssh_public_key                                = "~/.ssh/aks-dev-sshkeys-terraform/aksdevsshkey.pub"
+ssh_public_key                                = "~/.ssh/aks-prd-sshkeys-terraform/aksprdsshkey.pub"
 labels_default                                = {
     "nodepool-type" = "kube-system"
     "environment"   = "production"
@@ -100,26 +101,21 @@ enable_node_public_ip         = false
 enable_host_encryption        = false
 node_vm_disk_size             = 30
 ultra_ssd_enabled             = false
-os_type                       = ["Windows", "Linux"]
-os_disk_size                  = [129, 30]
-node_pool                     = ["legacy", "modern"]
+os_type                       = ["Linux"]
+os_disk_size                  = [30]
+node_pool                     = ["modern"]
 zones                         = []
-max_pods                      = [30, 60]
+max_pods                      = [60]
 enable_public_ip              = false
-vm_size                       = ["Standard_B2ms", "Standard_B2ms"]
+vm_size                       = ["Standard_B2ms"]
 enable_auto_scaling           = true
-agent_count                   = ["2", "1"]
-max_nodes                     = ["3", "3"]
-min_nodes                     = ["1", "1"]
-mode                          = ["User","User"]
+agent_count                   = ["1"]
+max_nodes                     = ["3"]
+min_nodes                     = ["1"]
+mode                          = ["User"]
 windows_admin_username        = "useradmin"
 windows_admin_password        = "#{Password_nodes_windons}#"
 labels                        =[{
-    "nodepool-type" = "User"
-    "environment"   = "production"
-    "nodepoolos"    = "windows"
-    "apps"          = "legacy"
-}, {
     "nodepool-type" = "User"
     "environment"   = "production"
     "nodepoolos"    = "linux"
@@ -148,9 +144,9 @@ log_analytics_workspace_id          = null
 #----------------------
 # VNET spoke Vars
 #----------------------
-vnet_name-spoke                                             = "vnet-k8s"
+vnet_name-spoke                                             = "vnet-envolve"
 tags_vnet_spoke    = {
-                                     resource = "vnet-spoke"
+                                     resource = "vnet-us-envolve-spoke"
 }
 address_space-spoke                                         = ["10.175.0.0/16"]
 subnet_names-spoke                                          = ["subnet-k8s"]
@@ -169,14 +165,14 @@ allow_virtual_network_access                                = true
 allow_forwarded_traffic                                     = false
 allow_gateway_transit                                       = false
 use_remote_gateways                                         = false
-peering_network_existing_vnet_name                          = "vnet-k8s-infra-base-eastus2-hub"
-peering_network_existing_rg_name                            = "rg-eastus-vnet-infra-base"
+peering_network_existing_vnet_name                          = "vnet-aks-envolve-infra-base-eastus2-hub"
+peering_network_existing_rg_name                            = "rg-us-envolve-vnet-infra-base"
 
 #----------------------
 # key vault Vars
 #----------------------
 
-kv_name  = "keyvault"
+kv_name  = "akvenvolve"
 tags_key_vault                                    = {
                                      resource = "vault"
 }
@@ -217,13 +213,13 @@ tags_log_analytcs                                   = {
                                      resource = "log"
 }
 
-log_analytics_workspace_name  = "monitoramento"
+log_analytics_workspace_name  = "la-envolve-monitoramento"
 
 
 #----------------------
 # Sotorage account Vars
 #----------------------
-storage_account_name = "azurelogs"
+storage_account_name = "envolvelogs"
 tier                 = "Standard"
 kind                 = "StorageV2"
 replication          = "LRS"

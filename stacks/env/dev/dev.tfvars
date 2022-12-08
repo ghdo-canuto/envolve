@@ -2,12 +2,12 @@
 # Global Vars
 #----------------------
 resource_group_names = [ 
-  "rg-eastus-vnet", 
-  "rg-eastus-vault", 
-  "rg-eastus-acr",  
-  "rg-eastus-aks",
-  "rg-monitoramento",
-  "rg-storage"
+  "rg-us-envolve-vnet", 
+  "rg-us-envolve-vault", 
+  "rg-us-envolve-acr",  
+  "rg-us-envolve-aks",
+  "rg-us-envolve-monitoramento",
+  "rg-us-envolve-storage"
 ]
 
 tags_rg = [
@@ -34,9 +34,9 @@ tags_rg = [
 location            = "eastus"
 
 global_tags = {
-  Department    = "Solo Network"
+  onwer         = "Canuto"
   Environment   = "dev"
-  Project       = "POC DevOps"
+  Project       = "Envolve Migração"
   Provisioner   = "Terraform"
 }
 
@@ -60,7 +60,7 @@ local_gw_module_enabled             = false
 # ACR Vars
 #--------------------
 
-acr_name         = "arcsolo"
+acr_name         = "arcusenvolve"
 acr_enable_admin = true
 sku              = "Standard"
 tags_acr         = {
@@ -71,13 +71,13 @@ tags_acr         = {
 # AKS Vars
 #----------------------
 
-cluster_name                                  = "k8s-solo"
+cluster_name                                  = "aks-us-envolve"
 tags_aks                                      = {
                                      resource = "aks"
 }
 sku_tier_aks                                  = "Free"
 k8s_version                                   = "1.23.12"
-dns_prefix                                    = "k8s-solo"
+dns_prefix                                    = "aks"
 disable_local_account                         = false
 private_cluster_enabled                       = false
 http_application_routing_enabled              = true
@@ -103,26 +103,21 @@ enable_node_public_ip         = false
 enable_host_encryption        = false
 node_vm_disk_size             = 30
 ultra_ssd_enabled             = false
-os_type                       = ["Windows", "Linux"]
+os_type                       = ["Linux"]
 os_disk_size                  = [129, 30]
-node_pool                     = ["legacy", "modern"]
+node_pool                     = ["apps"]
 zones                         = []
-max_pods                      = [30, 60]
+max_pods                      = [30]
 enable_public_ip              = false
-vm_size                       = ["Standard_B2ms", "Standard_B2ms"]
+vm_size                       = ["Standard_B2ms"]
 enable_auto_scaling           = true
-agent_count                   = ["2", "1"]
-max_nodes                     = ["3", "3"]
-min_nodes                     = ["1", "1"]
-mode                          = ["User","User"]
+agent_count                   = ["2"]
+max_nodes                     = ["3"]
+min_nodes                     = ["1"]
+mode                          = ["User"]
 windows_admin_username        = "useradmin"
 windows_admin_password        = "#{Password_nodes_windons}#"
 labels                        =[{
-    "nodepool-type" = "User"
-    "environment"   = "production"
-    "nodepoolos"    = "windows"
-    "apps"          = "legacy"
-}, {
     "nodepool-type" = "User"
     "environment"   = "production"
     "nodepoolos"    = "linux"
@@ -150,12 +145,12 @@ log_analytics_workspace_id          = null
 #----------------------
 # VNET spoke Vars
 #----------------------
-vnet_name-spoke                                             = "vnet-k8s-solo-devops"
+vnet_name-spoke                                             = "vnet-aks-envolve"
 tags_vnet_spoke    = {
-                                     resource = "vnet-spoke"
+                                     resource = "vnet-us-spoke-envolve"
 }
 address_space-spoke                                         = ["192.168.0.0/16"]
-subnet_names-spoke                                          = ["subnet-k8s"]
+subnet_names-spoke                                          = ["sub-us-envolve-aks-k8s"]
 subnet_prefixes-spoke                                       = ["192.168.0.0/16"]
 subnet_service_endpoints-spoke                              = {}
 subnet_enforce_private_link_endpoint_network_policies-spoke = {}
@@ -171,15 +166,15 @@ allow_virtual_network_access                                = true
 allow_forwarded_traffic                                     = false
 allow_gateway_transit                                       = false
 use_remote_gateways                                         = false
-peering_network_existing_vnet_name                          = "vnet-k8s-infra-base-eastus2-hub"
-peering_network_existing_rg_name                            = "rg-eastus-vnet-infra-base"
+peering_network_existing_vnet_name                          = "vnet-aks-envolve-infra-base-eastus2-hub"
+peering_network_existing_rg_name                            = "rg-us-envolve-vnet-infra-base"
 
 
 #----------------------
 # key vault Vars
 #----------------------
 
-kv_name  = "keyvault"
+kv_name  = "akvenvolve"
 tags_key_vault                                    = {
                                      resource = "vault"
 }

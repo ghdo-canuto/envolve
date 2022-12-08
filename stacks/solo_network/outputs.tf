@@ -93,11 +93,11 @@ output "vnet_subnet_names" {
 #----------------------
 
 output "key_vault_id" {
-  value =  var.key_vault_module_enabled == true ? module.key_vault[0].key_vault_id : null
+  value = var.key_vault_module_enabled == true ? module.key_vault[0].key_vault_id : null
 }
 
 output "key_vault_name" {
-  value =  var.key_vault_module_enabled == true ? module.key_vault[0].key_vault_name : null
+  value = var.key_vault_module_enabled == true ? module.key_vault[0].key_vault_name : null
 }
 
 #----------------------
@@ -105,7 +105,7 @@ output "key_vault_name" {
 #----------------------
 
 output "access_policy" {
-  value =  var.key_vault_module_enabled == true ? module.key_vault_access_policy[*] : null
+  value = var.key_vault_module_enabled == true ? module.key_vault_access_policy[*] : null
 }
 
 
@@ -123,11 +123,11 @@ output "pip_name" {
 #----------------------
 
 output "azure_bastion_host_pip" {
-  value = var.bastion_module_enabled && var.pip_module_enabled  ? module.bastion[0].azure_bastion_host_pip : null
+  value = var.bastion_module_enabled && var.pip_module_enabled ? module.bastion[0].azure_bastion_host_pip : null
 }
 
 output "azure_bastion_host_id" {
-  value = var.bastion_module_enabled && var.pip_module_enabled  ?  module.bastion[0].azure_bastion_host_id : null
+  value = var.bastion_module_enabled && var.pip_module_enabled ? module.bastion[0].azure_bastion_host_id : null
 }
 
 #----------------------
@@ -135,7 +135,7 @@ output "azure_bastion_host_id" {
 #----------------------
 
 output "zone_name" {
-  value =  var.dns_private_module_enabled == true ? module.dns_private[0].zone_name : null
+  value = var.dns_private_module_enabled == true ? module.dns_private[0].zone_name : null
 }
 
 output "a_records" {

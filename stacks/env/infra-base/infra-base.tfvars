@@ -2,10 +2,10 @@
 # Global Vars
 #----------------------
 resource_group_names = [
-  "rg-eastus-vm", 
-  "rg-eastus-vnet",  
-  "rg-eastus-bastion", 
-  "rg-network-watcher"
+  "rg-us-envolve-vm", 
+  "rg-us-envolve-vnet",  
+  "rg-us-envolve-bastion", 
+  "rg-us-envolve-watcher"
 ]
 
 tags_rg = [{
@@ -24,10 +24,11 @@ tags_rg = [{
 
 location            = "eastus2"
 global_tags = {
-  Department    = "Solo Network"
+  Department    = "Envolve IT"
   Environment   = "infra base"
-  Project       = "POC DevOps"
+  Project       = "Migração DevOps"
   Provisioner   = "Terraform"
+  onwer         = "Canuto"
 }
 
 acr_module_enabled                  = false
@@ -49,9 +50,9 @@ local_gw_module_enabled             = true
 #----------------------
 # VNET hub Vars
 #----------------------
-vnet_name                                             = "vnet-k8s"
+vnet_name                                             = "vnet-aks-envolve"
 tags_vnet_hub                                    = {
-                                     resource = "vnet-hub"
+                                     resource = "vnet-us-envovle-hub"
 }
 address_space                                         = ["172.20.0.0/16"]
 subnet_names                                          = ["AzureBastionSubnet", "vms", "GatewaySubnet"]
@@ -76,7 +77,7 @@ nat_gateway_ids                                       = {}
 # Public IP Vars
 #----------------------
 
-pip_name              = "pip_bastion"
+pip_name              = "pip-envovle-bastion"
 tags_public_ip                                    = {
                                      resource = "PIP"
 }
@@ -89,7 +90,7 @@ sku_tier              = "Regional"
 # Bastion Vars
 #----------------------
 
-bastion_name = "bastion-teste"
+bastion_name = "bastion-envolve"
 tags_bastion                                    = {
                                      resource = "bastion"
 }
@@ -111,10 +112,10 @@ tags_dns_private                                    = {
                                      resource = "dns"
 }
 vnet_links       = [{
-  name   = "hub"
-  virtual_network_name = "vnet-k8s-infra-base-eastus2-hub"
+  name   = "hub-us-envolve"
+  virtual_network_name = "vnet-aks-envolve-infra-base-eastus2-hub"
   registration_enabled = true
-  rg_name              = "rg-eastus-vnet-infra-base"
+  rg_name              = "rg-us-envolve-vnet-infra-base"
 }]
 a_records        = []
 cname_records    = []
@@ -132,7 +133,7 @@ ip_address                = "172.20.200.182"
 existing_public_ip        = false
 is_public_ip_enabled      = false
 public_ip_id              = ""
-vm_name                   = "vmAD"
+vm_name                   = "vm-ad"
 vm_size_win               = "Standard_B2S"
 license_act               = "None"
 admin_win_username        = "useradmin"
@@ -165,7 +166,7 @@ tags_network_watcher  = {
 # Public IP Gateway Vars
 #----------------------
 
-pip_name_gw              = "pip-vpn"
+pip_name_gw              = "pip-envovel-vpn"
 tags_public_ip_gw                                    = {
                                      resource = "PIP-gataway"
 }
@@ -179,7 +180,7 @@ sku_tier_gw              = "Regional"
 # Network gateway Vars
 #----------------------
 
-gateway_name                  = "vpn-s2s"
+gateway_name                  = "vpn-envolves-s2s"
 enable_bgp                    = false
 active_active                 = false
 sku_gw                        = "VpnGw1"

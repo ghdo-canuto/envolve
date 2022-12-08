@@ -26,78 +26,78 @@ variable "global_tags" {
 }
 
 variable "acr_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "aks_module_enabled" {
-  type        = bool
-  default     = false
+  type    = bool
+  default = false
 }
 
 variable "vnet-spoke_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "vnet-hub_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "key_vault_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "pip_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "pip_vpn_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "bastion_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "dns_private_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "vm-win_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "wks_log_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "network_watcher_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "storage_account_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "gatway_vpn_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "local_gw_module_enabled" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 #----------------------
@@ -107,7 +107,7 @@ variable "local_gw_module_enabled" {
 variable "acr_name" {
   type        = string
   description = "Nome do Registro de Container. Precisa ser um nome único porque a partir daqui será gerado o nome do registry."
-  default = ""
+  default     = ""
 }
 
 variable "tags_acr" {
@@ -119,7 +119,7 @@ variable "tags_acr" {
 variable "acr_enable_admin" {
   type        = string
   description = "Habilita usuário administrativo no Azure Container Registry"
-  default = ""
+  default     = ""
 }
 
 variable "sku" {
@@ -479,7 +479,7 @@ variable "min_nodes" {
 variable "mode" {
   type        = list(string)
   description = "Este pool de nós deve ser usado para recursos do kube-system ou do user. Por padrão user"
-  default = ["System"]
+  default     = ["System"]
   validation {
     condition = alltrue([
       for mo in var.mode : can(regex("User|System", mo))
@@ -612,13 +612,13 @@ variable "nat_gateway_ids-spoke" {
 
 variable "peering_network_existing_vnet_name" {
   type        = string
-  description = "Nome da rede virtual que deseja fazer o peering" 
+  description = "Nome da rede virtual que deseja fazer o peering"
   default     = ""
 }
 
 variable "peering_network_existing_rg_name" {
   type        = string
-  description = "Nome do rg da rede virtual que deseja fazer o peering" 
+  description = "Nome do rg da rede virtual que deseja fazer o peering"
   default     = ""
 }
 
@@ -927,7 +927,7 @@ variable "tags_bastion" {
 variable "sku_bastion_name" {
   type        = string
   description = "O SKU do Bastion Host (Basic ou Standard)."
-  default = "Standard"
+  default     = "Standard"
   validation {
     condition     = can(regex("Basic|Standard", var.sku_bastion_name))
     error_message = "Selecione apenas um dos valores aceitos como SKU: Basic ou Standard."
