@@ -175,6 +175,11 @@ jobs:
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
+
+    - name: List files
+      run: |
+        cd ${{ github.workspace }}
+        ls -ltrh
     
     - name: terraform Apply
       run: |
