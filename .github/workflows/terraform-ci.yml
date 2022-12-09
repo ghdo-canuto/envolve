@@ -168,7 +168,7 @@ jobs:
       name: downlaod artifact
       with:
         name: _drop
-        path: cd ${{ github.workspace }}
+        path: ${{ github.workspace }}
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
@@ -181,5 +181,5 @@ jobs:
     
     - name: terraform Apply
       run: |
-        cd ${{ github.workspace }}
         terraform apply -auto-approve envolve.json
+      working-directory:  ${{ github.workspace }}
