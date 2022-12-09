@@ -46,7 +46,7 @@ jobs:
       # TerraformBackendStorageAccount: ${{ secrets.TF_BACKEND_STORAGE_ACCOUNT }}
       # TerraformBackendResourceGroup: ${{ secrets.TF_BACKEND_RESOURCE_GROUP }}
       # TerraformBackendStorageContainer: ${{ secrets.TF_BACKEND_CONTAINER }}    
-      environmentName: dev     
+      environmentName: infra-base     
       
     defaults:
       run:
@@ -165,7 +165,7 @@ jobs:
     name: 'Terraform apply'
     needs: [tf_validate]
     runs-on: ubuntu-latest
-    environment: dev
+    environment: infra-base
     env:
       # ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
       # ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
@@ -174,7 +174,7 @@ jobs:
       # TerraformBackendStorageAccount: ${{ secrets.TF_BACKEND_STORAGE_ACCOUNT }}
       # TerraformBackendResourceGroup: ${{ secrets.TF_BACKEND_RESOURCE_GROUP }}
       # TerraformBackendStorageContainer: ${{ secrets.TF_BACKEND_CONTAINER }}    
-      environmentName: dev   
+      environmentName: infra-base   
     
     defaults:
       run:
