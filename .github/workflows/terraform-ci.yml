@@ -165,6 +165,15 @@ jobs:
     needs: [tf_validate]
     runs-on: ubuntu-latest
     environment: dev
+    env:
+      # ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      # ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      # ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      # ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+      # TerraformBackendStorageAccount: ${{ secrets.TF_BACKEND_STORAGE_ACCOUNT }}
+      # TerraformBackendResourceGroup: ${{ secrets.TF_BACKEND_RESOURCE_GROUP }}
+      # TerraformBackendStorageContainer: ${{ secrets.TF_BACKEND_CONTAINER }}    
+      environmentName: dev   
     
     defaults:
       run:
