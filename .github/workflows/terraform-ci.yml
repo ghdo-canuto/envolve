@@ -177,6 +177,7 @@ jobs:
       run: |
         cd ${{ github.workspace }}
         ls -ltrh
+        cat envolve.json
     
     - name: terraform Apply
       run: |
