@@ -180,5 +180,5 @@ jobs:
     
     - name: terraform Apply
       run: |
-        cd ${{ github.workspace }}/stacks/solo_network
+        #cd ${{ github.workspace }}/stacks/solo_network
         terraform apply -auto-approve envolve.json
