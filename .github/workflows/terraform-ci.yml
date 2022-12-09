@@ -116,8 +116,9 @@ jobs:
     - uses: actions/upload-artifact@v2
       name: gerando artefato
       with:
-        name: _drop
-        path: ${{ github.workspace }}/stacks/solo_network/
+        name: tfplan
+        path: ${{ github.workspace }}/stacks/solo_network/envolve.tfplan
+
     - name: Adiconando terraform plan ao pull request
       uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
@@ -185,8 +186,8 @@ jobs:
     - uses: actions/download-artifact@v2
       name: downlaod artifact
       with:
-        name: _drop
-        path: ${{ github.workspace }}
+        name: tfplan
+        path: ${{ github.workspace }}/stacks/solo_network/
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
@@ -201,9 +202,8 @@ jobs:
       run: |
         ls ${{ github.workspace }}/stacks/solo_network
         ls -ltrh
-        cat envolve.json
     
     - name: terraform Apply
       run: |
-        terraform apply -auto-approve envolve.json
-      working-directory:  ${{ github.workspace }}
+        terraform apply envolve.tfplan
+      working-directory:  ${{ github.workspace }}/stacks/solo_network/
