@@ -175,9 +175,8 @@ jobs:
 
     - name: List files
       run: |
-        # cd ${{ github.workspace }}/stacks/solo_network
-        pwd
-        ls -ltrh -R
+        cd ${{ github.workspace }}
+        ls -ltrh
     
     - name: terraform Apply
       run: |
