@@ -2,7 +2,9 @@
 **/.terraform.lock.hcl
 **/.terraform/*
 **/.infracost/*
-
+**/dev-local/
+**/infra-base-local/
+**/prd-local/
 # .tfstate files
 *.tfstate
 *.tfstate.*

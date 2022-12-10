@@ -166,8 +166,8 @@ allow_virtual_network_access                                = true
 allow_forwarded_traffic                                     = false
 allow_gateway_transit                                       = false
 use_remote_gateways                                         = false
-peering_network_existing_vnet_name                          = "vnet-aks-envolve-infra-base-eastus2-hub"
-peering_network_existing_rg_name                            = "rg-us-envolve-vnet-infra-base"
+peering_network_existing_vnet_name                          = "vnet-aks-envolve-dev-eastus-spoke"
+peering_network_existing_rg_name                            = "rg-us-envolve-vnet-dev"
 
 
 #----------------------
