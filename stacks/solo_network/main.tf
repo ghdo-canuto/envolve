@@ -351,7 +351,7 @@ module "network_watcher" {
   source = "../../modules/network_watcher"
 
   network_watcher_name = var.network_watcher_name
-  resource_group_name  = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("network-watcher", resource_group_name))])
+  resource_group_name  = one([for resource_group_name in azurerm_resource_group.rg.*.name : resource_group_name if can(regex("envolve-watcher", resource_group_name))])
   tags                 = merge(var.global_tags, var.tags_network_watcher)
 
   depends_on = [
